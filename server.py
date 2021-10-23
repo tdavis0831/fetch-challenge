@@ -1,12 +1,27 @@
+
+#routes
+
 from flask import Flask, render_template, request, flash, session, redirect
 from model import connect_to_db
 import crud
 
-from jinja2 import StrictUndefined
+
+
+#add transaction for specfic player and date
+# @app.route("/addtransaction", methods=["PUT"] )
+# def add_transaction_for_player_and_date():
+
+
+
+
+
+
+
+
+
 
 app = Flask(__name__)
 app.secret_key = "dev"
-app.jinja_env.undefined = StrictUndefined
 
 
 
