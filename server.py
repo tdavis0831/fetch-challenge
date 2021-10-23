@@ -5,30 +5,27 @@ from flask import Flask, render_template, request, flash, session, redirect
 from model import connect_to_db
 import crud
 
-
-
-#add transaction for specfic player and date
-# @app.route("/addtransaction", methods=["PUT"] )
-# def add_transaction_for_player_and_date():
-
-
-
-
-
-
-
-
-
-
 app = Flask(__name__)
 app.secret_key = "dev"
 
 
+#add transaction for specfic player and date
+@app.route("/addtransaction", methods=["PUT"] )
+def create_user_transaction(payer, points, timestamp):
+
+    user = PayerAccountInfo(payer=payer, points=points, timestamp=timestamp)
+
+    db.session.add(user)
+    db.session.commit()
+
+    return user
+    return (f"transaction added")
 
 
-
-
-
+#spend points route
+# @app.route("/redeem", methods=["PUT"])
+# def redeem_points():
+#     points = 
 
 
 if __name__ == "__main__":
