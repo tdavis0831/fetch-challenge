@@ -10,8 +10,8 @@ class PayerAccountInfo(db.Model):
     #creates payer, points and time
 
     __tablename__ = "payers"
-
-    payer = db.Column(db.String, primary_key = True)
+    payer_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    payer = db.Column(db.String)
     points = db.Column(db.Integer)
     timestamp = db.Column(db.DateTime)
 
