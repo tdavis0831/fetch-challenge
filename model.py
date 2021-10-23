@@ -1,15 +1,17 @@
 from datetime import datetime #for date information
-from flask_sqlachemy import SQLAlchemy #sqlalchemy import
+from flask_sqlalchemy import SQLAlchemy #sqlalchemy import
 
 
-db=SQLALCHEMY()  #sqlalchemy intergration
+db = SQLAlchemy()  #sqlalchemy intergration
 
 
 
-class PayerAccountInfo(db.model):
+class PayerAccountInfo(db.Model):
     #creates payer, points and time
 
-    payer = db.Column(db.String)
+    __tablename__ = "payers"
+
+    payer = db.Column(db.String, primary_key = True)
     points = db.Column(db.Integer)
     timestamp = db.Column(db.DateTime)
 
