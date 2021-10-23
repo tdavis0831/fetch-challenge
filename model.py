@@ -20,6 +20,32 @@ class PayerAccountInfo(db.Model):
         return f"Payer payer_string={self.payer} points={self.points} date ={self.timestamp}"
 
 
+class Transaction(db.Model):
+
+    #table for how transactions should be created 
+    __tablename__ = "transactions"
+
+    transaction_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    points = db.Column(db.Integer)
+    fk_payer = db.Column(db.String, db.ForeignKey("payers.payer"))
+
+    transaction = db.relationship("PayerAccountInfo", backfref="transactions")
+    
+    def __repr__(self):
+        return f"player={self.transaction}transaction transaction={self.points} "
+
+class SpendPoints(db.Model):
+    #format for spending points points and total 
+    __tablename__="spending"
+
+    points = db.Column(db.Integer)
+    
+
+    
+
+
+
+
 
 
 #this function connects to the database named fetch that was created the rest of this code is used to 
