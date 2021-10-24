@@ -10,7 +10,7 @@ class PayerAccountInfo(db.Model):
     #creates payer, points and time
 
     __tablename__ = "payers"
-    payer_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    payer_id = db.Column(db.String, primary_key=True)
     payer = db.Column(db.String)
     points = db.Column(db.Integer)
     timestamp = db.Column(db.DateTime)
@@ -19,27 +19,19 @@ class PayerAccountInfo(db.Model):
     def __repr__(self):
         return f"Payer payer_string={self.payer} points={self.points} date ={self.timestamp}"
 
-
 class Transaction(db.Model):
-
-    #table for how transactions should be created 
     __tablename__ = "transactions"
-
-    transaction_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    trans_id = db.Column(db.String, primary_key=True, index=True)
     points = db.Column(db.Integer)
-    fk_payer = db.Column(db.String, db.ForeignKey("payers.payer"))
-
-    transaction = db.relationship("PayerAccountInfo", backfref="transactions")
+    used_points = db.Column(db.Integer, default=0)
+    payer = db.Column(db.String)
+    transaction_date = db.Column(db.DateTime)
+    fk_payer_id = db.Column(db.String, db.ForeignKey("payers.payer_id"))
     
+    user = db.relationship("User", back_populates="transactions")
+
     def __repr__(self):
-        return f"player={self.transaction}transaction transaction={self.points} "
-
-class SpendPoints(db.Model):
-    #format for spending points points and total 
-    __tablename__="spending"
-
-    points = db.Column(db.Integer)
-    
+        return f"Payer payer={self.payer} points={self.points} date ={self.timestamp}"
 
     
 
@@ -64,6 +56,7 @@ def connect_to_db(flask_app, db_uri="postgresql:///fetch", echo=False):
 
 if __name__ == "__main__":
     from server import app
+
 
 
 
